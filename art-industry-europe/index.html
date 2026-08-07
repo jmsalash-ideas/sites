@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<!--
+  Deck: "Where a Reputation Is Made" — el mercado europeo del arte para galeristas japoneses.
+  Entregable segun docs/spec.md §9: HTML autocontenido, 16 diapositivas, 16:9.
+  Idioma del deck: ingles (supuesto A4). Comentarios del codigo: espanol.
+
+  Todas las cifras verificadas contra fuente el 2026-08-07. Ver docs/sources.md.
+  Conversion USD→JPY: 157.55 JPY = 1 USD, 7 de agosto de 2026 (spec §2, criterio 5).
+
+  BORRADOR PARA REACCION — no es version final.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where a Reputation Is Made — Europe for Japanese Galleries (DRAFT)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+<!-- ══ 1 — Portada ══ -->
+<section class="slide slide--cover" data-slide="1">
+  <div class="cover-rule"></div>
+  <p class="eyebrow">A proposal for Japanese galleries and dealers</p>
+  <h1>Where a Reputation<br>Is Made</h1>
+  <p class="deck-sub">The case for showing your painters in Europe and the United Kingdom</p>
+  <div class="cover-meta">
+    <span class="badge badge--draft">DRAFT FOR REACTION</span>
+    <span class="badge badge--verify"><b id="verify-count">0</b> figures pending verification</span>
+    <span class="badge">All figures USD · ¥157.55 = $1, 7 Aug 2026</span>
+  </div>
+  <p class="slide-note">Función: portada. El contador de <code>[VERIFY]</code> se cuenta del DOM;
+     en cero, el distintivo se oculta solo.</p>
+</section>
+
+<!-- ══ 2 — Escala del mercado ══ -->
+<section class="slide" data-slide="2">
+  <header class="slide-head">
+    <p class="eyebrow">The ground</p>
+    <h2>The market you would be entering</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">A <b>$59.6 billion</b> world market — about <b>¥9.4 trillion</b>.
+         Two of its four largest national markets are in Europe.</p>
+      <p class="say-p">The United Kingdom is the second-largest art market on earth and France
+         is the fourth. Between them they turn over <b>$15.0bn</b> (¥2.36tn) a year — before
+         Switzerland, Germany, Italy or Spain are counted at all.</p>
+      <p class="say-p">Everything in this deck is stated in US dollars, with the conversion date
+         printed, and a yen gloss where the number affects your budget.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Art market by country, 2025 <span class="chart-unit">USD bn</span></p>
+      <svg viewBox="0 0 620 262" role="img" aria-label="Bar chart of art market value by country in 2025: United States 26.0 billion dollars, United Kingdom 10.5, China 8.5, France 4.5.">
+        <g class="grid">
+          <line x1="140" y1="16" x2="140" y2="246"></line>
+        </g>
+        <!-- Escala: 400 px = 26.0 USD bn ⇒ 15.385 px por mil millones -->
+        <g class="row">
+          <text class="cat" x="128" y="44">United States</text>
+          <rect class="bar bar--other" x="140" y="26" width="400" height="26" rx="4"></rect>
+          <text class="val" x="552" y="44">26.0</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="128" y="102">United Kingdom</text>
+          <rect class="bar bar--eu" x="140" y="84" width="161.5" height="26" rx="4"></rect>
+          <text class="val" x="314" y="102">10.5</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="128" y="160">China</text>
+          <rect class="bar bar--other" x="140" y="142" width="130.8" height="26" rx="4"></rect>
+          <text class="val" x="283" y="160">8.5</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="128" y="218">France</text>
+          <rect class="bar bar--eu" x="140" y="200" width="69.2" height="26" rx="4"></rect>
+          <text class="val" x="221" y="218">4.5</text>
+        </g>
+      </svg>
+      <p class="legend">
+        <span class="key key--eu">Europe</span>
+        <span class="key key--other">Rest of world</span>
+      </p>
+      <figcaption>These four markets are 84% of the global total of $59.6bn.
+        Source: <b>Art Basel &amp; UBS Global Art Market Report 2026</b> (2026 edition, data for 2025).</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: fija la escala. Es un gráfico de mercado y no dice nada sobre
+     ningún artista ni sobre ninguna nacionalidad (criterio 4).</p>
+</section>
+
+<!-- ══ 3 — La cuota europea, incluido el declive ══ -->
+<section class="slide" data-slide="3">
+  <header class="slide-head">
+    <p class="eyebrow">The part we will not hide</p>
+    <h2>This market is smaller than it was a decade ago</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">In 2015 the world art market was <b>$63.8bn</b>. In 2025 it was
+         <b>$59.6bn</b> — and that is before inflation.</p>
+      <p class="say-p">The United Kingdom's share has gone from <b>21% in 2016</b> to
+         <b>18% in 2025</b>. You will open the same report and see the same arrows, so we are
+         putting them up first.</p>
+      <p class="say-p alert">We are not going to argue that this line is about to turn around.
+         There is no European growth story anywhere in this deck. The strength we are claiming
+         is <b>structural</b>, not financial — and it is on the next slide.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Global art market <span class="chart-unit">USD bn</span></p>
+      <svg viewBox="0 0 620 262" role="img" aria-label="Line chart of global art market value from 2015 to 2025 in USD billions: 63.8, 56.9, 63.7, 67.4, 64.1, 50.1, 65.1, 67.8, 65.0, 57.5, 59.6. The 2025 value is below the 2015 value.">
+        <g class="grid">
+          <line x1="50" y1="212" x2="600" y2="212"></line>
+          <line x1="50" y1="160" x2="600" y2="160"></line>
+          <line x1="50" y1="107" x2="600" y2="107"></line>
+          <line x1="50" y1="55"  x2="600" y2="55"></line>
+        </g>
+        <g class="tick">
+          <text x="42" y="216">0</text>
+          <text x="42" y="164">20</text>
+          <text x="42" y="111">40</text>
+          <text x="42" y="59">60</text>
+        </g>
+        <!-- Referencia: nivel de 2015, para que 2025 se lea por debajo -->
+        <line class="ref" x1="50" y1="45.1" x2="600" y2="45.1"></line>
+        <text class="ref-lab" x="600" y="38" text-anchor="end">2015 level</text>
+        <polyline class="line" points="50,45.1 105,63.1 160,45.3 215,35.6 270,44.3 325,80.9 380,41.7 435,34.6 490,41.9 545,61.5 600,56.1"></polyline>
+        <circle class="dot" cx="50" cy="45.1" r="5"></circle>
+        <circle class="dot" cx="435" cy="34.6" r="5"></circle>
+        <circle class="dot dot--now" cx="600" cy="56.1" r="5"></circle>
+        <text class="pt" x="62" y="50">63.8</text>
+        <text class="pt" x="435" y="24" text-anchor="middle">67.8</text>
+        <text class="pt pt--now" x="590" y="76" text-anchor="end">59.6</text>
+        <g class="tick">
+          <text x="50"  y="234" text-anchor="middle">2015</text>
+          <text x="325" y="234" text-anchor="middle">2020</text>
+          <text x="600" y="234" text-anchor="middle">2025</text>
+        </g>
+      </svg>
+      <figcaption>Annual values as published in successive editions; figures are revised between
+        editions. Source: <b>Art Basel &amp; UBS Global Art Market Report</b>, editions 2016&ndash;2026.</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: compra credibilidad pronto. Va ANTES del giro de la 4 (criterio 2).
+     Eje desde cero, ventana completa, sin línea de tendencia. Regla de honestidad de spec §3.</p>
+</section>
+
+<!-- ══ 4 — El giro ══ -->
+<section class="slide" data-slide="4">
+  <header class="slide-head">
+    <p class="eyebrow">The turn</p>
+    <h2>What a sales figure cannot measure</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede">Market share measures where a transaction <em>clears</em>.<br>
+       It does not measure where the value was <em>conferred</em>.</p>
+    <div class="cols cols-3">
+      <div class="col">
+        <h3>What the last chart counted</h3>
+        <p>Turnover, attributed to the country of the seller. A painting sold from a New York
+           booth is a New York sale — wherever it was made, shown, or written about.</p>
+      </div>
+      <div class="col">
+        <h3>What it cannot count</h3>
+        <p>The biennial that put the artist in front of forty curators at once. The catalogue
+           essay a specialist will still be citing in ten years. The museum acquisition that
+           puts a floor under every price that follows.</p>
+      </div>
+      <div class="col col--accent">
+        <h3>Why that is your business</h3>
+        <p>You are not choosing a market to <em>sell</em> in. You are choosing a market to be
+           <em>validated</em> in — and then selling wherever you like, Tokyo included.</p>
+      </div>
+    </div>
+    <p class="pull">Turnover follows capital. Reputation follows institutions.<br>
+       For a decade the two have been moving apart.</p>
+  </div>
+  <p class="slide-note">Función: bisagra del deck. Sin datos externos. Va DESPUÉS del declive (criterio 2).</p>
+</section>
+
+<!-- ══ 5 — Densidad institucional ══ -->
+<section class="slide" data-slide="5">
+  <header class="slide-head">
+    <p class="eyebrow">The asset</p>
+    <h2>Institutional density with no equivalent anywhere</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede lede--sm">Six cities, each with its own legitimating machinery, all within a
+       short flight of one another. No other region concentrates this many independent
+       validators in this little space.</p>
+    <div class="cols cols-3 cols--tight">
+      <div class="col">
+        <h3>London</h3>
+        <p class="col-items">Tate Modern · Frieze London · Serpentine</p>
+        <p>The English-language critical press. What is written here is read everywhere,
+           including by your own collectors.</p>
+      </div>
+      <div class="col">
+        <h3>Paris</h3>
+        <p class="col-items">Centre Pompidou · Art Basel Paris, Grand Palais · Bourse de Commerce ·
+           Fondation Louis Vuitton</p>
+        <p>Private museums that both exhibit and acquire — the rarest combination in Europe.</p>
+      </div>
+      <div class="col">
+        <h3>Basel</h3>
+        <p class="col-items">Art Basel · Fondation Beyeler · Kunstmuseum Basel</p>
+        <p>The week the trade uses to calibrate itself. A placement here is read as a
+           verdict by everyone who was not there.</p>
+      </div>
+      <div class="col">
+        <h3>Berlin</h3>
+        <p class="col-items">Hamburger Bahnhof · the Kunstverein and residency circuit</p>
+        <p>Little market, dense curatorial layer. Reputations are drafted here and priced
+           elsewhere.</p>
+      </div>
+      <div class="col">
+        <h3>Milan</h3>
+        <p class="col-items">Fondazione Prada · Pirelli HangarBicocca</p>
+        <p>A private collecting base with real depth, and Venice two hours away.</p>
+      </div>
+      <div class="col">
+        <h3>Madrid</h3>
+        <p class="col-items">Museo Reina Sofía · ARCOmadrid</p>
+        <p>The entrance to a Spanish-language network that reaches well beyond Europe.
+           We return to this at the end.</p>
+      </div>
+    </div>
+    <p class="band">And the certifying events that belong to no single city:
+       <b>Venice Biennale</b> (since 1895) · <b>documenta</b>, Kassel (every five years) ·
+       <b>Manifesta</b> (nomadic). These are the invitations that change a CV permanently.</p>
+  </div>
+  <p class="slide-note">Función: el "sin equivalente en el mundo". Sólo instituciones nombradas,
+     ninguna cifra. Madrid ya apunta a la 16.</p>
+</section>
+
+<!-- ══ 6 — Suficiencia, no crecimiento ══ -->
+<section class="slide" data-slide="6">
+  <header class="slide-head">
+    <p class="eyebrow">Sufficiency, not growth</p>
+    <h2>Big enough to be worth the freight</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">The question is not &ldquo;is Europe growing?&rdquo;
+         It is &ldquo;is Europe <em>big enough</em>?&rdquo;</p>
+      <p class="say-p">Those are different questions and only the second one is yours. The UK and
+         France together turn over <b>$15.0bn</b> a year — <b>1.8 times</b> the entire Chinese
+         market, and that is before Switzerland, Germany, Italy and Spain.</p>
+      <p class="say-p">A market can be flat for a decade and still absorb everything you can ship
+         into it. Sufficiency is the test. Growth is somebody else's argument.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Annual art market turnover, 2025 <span class="chart-unit">USD bn</span></p>
+      <svg viewBox="0 0 620 220" role="img" aria-label="Bar chart comparing 2025 art market turnover: United States 26.0 billion dollars, United Kingdom plus France 15.0 billion, China 8.5 billion.">
+        <g class="grid"><line x1="150" y1="16" x2="150" y2="204"></line></g>
+        <g class="row">
+          <text class="cat" x="138" y="51">United States</text>
+          <rect class="bar bar--other" x="150" y="30" width="400" height="30" rx="4"></rect>
+          <text class="val" x="562" y="51">26.0</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="138" y="121">UK + France</text>
+          <rect class="bar bar--eu" x="150" y="100" width="230.8" height="30" rx="4"></rect>
+          <text class="val" x="393" y="121">15.0</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="138" y="191">China</text>
+          <rect class="bar bar--other" x="150" y="170" width="130.8" height="30" rx="4"></rect>
+          <text class="val" x="293" y="191">8.5</text>
+        </g>
+      </svg>
+      <p class="legend">
+        <span class="key key--eu">Europe</span>
+        <span class="key key--other">Rest of world</span>
+      </p>
+      <figcaption>UK $10.5bn + France $4.5bn. Source:
+        <b>Art Basel &amp; UBS Global Art Market Report 2026</b> (2026 edition, data for 2025).</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: suficiencia. Eje desde cero, sin línea de tendencia, ninguna
+     afirmación de crecimiento (criterio 1).</p>
+</section>
+
+<!-- ══ 7 — París ══ -->
+<section class="slide" data-slide="7">
+  <header class="slide-head">
+    <p class="eyebrow">The one line that rises</p>
+    <h2>Paris, after Brexit</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">France grew <b>9%</b> in 2025 while the UK grew 2%. At <b>8%</b> of
+         the world market, France is at its highest standing in over a decade.</p>
+      <p class="say-p">The fair week moved with it. <b>FIAC</b> lost the Grand Palais in 2022 to
+         what became <b>Paris+ par Art Basel</b>; in 2024 it was renamed <b>Art Basel Paris</b>
+         and moved into the restored Grand Palais itself. Bourse de Commerce and Fondation Louis
+         Vuitton now programme at a scale that pulls curators through the city every October.</p>
+      <p class="say-p caveat">Read this correctly: Paris is gaining <em>within</em> Europe. This
+         is a reallocation, not European growth — the UK line in the same frame is flat.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Market turnover, UK and France <span class="chart-unit">USD bn</span></p>
+      <svg viewBox="0 0 620 220" role="img" aria-label="Grouped bar chart: United Kingdom 10.4 billion dollars in 2024 and 10.5 in 2025, up 2 percent. France 4.2 billion in 2024 and 4.5 in 2025, up 9 percent.">
+        <g class="grid"><line x1="120" y1="16" x2="120" y2="204"></line></g>
+        <text class="colhead" x="612" y="20" text-anchor="end">2024 &#8594; 2025</text>
+        <g class="row">
+          <text class="cat" x="108" y="61">United Kingdom</text>
+          <rect class="bar bar--prev" x="120" y="26" width="396.2" height="22" rx="4"></rect>
+          <rect class="bar bar--now"  x="120" y="50" width="400" height="22" rx="4"></rect>
+          <text class="val val--sm" x="528" y="43">10.4</text>
+          <text class="val val--sm" x="532" y="67">10.5</text>
+          <text class="delta" x="612" y="61" text-anchor="end">+2%</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="108" y="165">France</text>
+          <rect class="bar bar--prev" x="120" y="130" width="160" height="22" rx="4"></rect>
+          <rect class="bar bar--now"  x="120" y="154" width="171.4" height="22" rx="4"></rect>
+          <text class="val val--sm" x="292" y="147">4.2</text>
+          <text class="val val--sm" x="303" y="171">4.5</text>
+          <text class="delta delta--up" x="612" y="165" text-anchor="end">+9%</text>
+        </g>
+      </svg>
+      <p class="legend">
+        <span class="key key--prev">2024</span>
+        <span class="key key--now">2025</span>
+      </p>
+      <figcaption>France: 7% of the global market in 2024, 8% in 2025 — the EU's largest market.
+        Source: <b>Art Basel &amp; UBS Global Art Market Report 2026</b> (2026 edition).</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: el único gráfico que sube. El UK plano en el mismo marco impide
+     leerlo como crecimiento europeo (criterio 1).</p>
+</section>
+
+<!-- ══ 8 — Confianza del coleccionista ══ -->
+<section class="slide" data-slide="8">
+  <header class="slide-head">
+    <p class="eyebrow">The money here is durable</p>
+    <h2>Art is held as wealth, not as decoration</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">Ultra-high-net-worth individuals held an estimated
+         <b>$2.56 trillion</b> in art and collectibles in 2024, projected to reach
+         <b>$3.47 trillion</b> by 2030.</p>
+      <p class="say-p">An estimated <b>$992bn</b> of art and collectibles is expected to change
+         hands over the next decade as wealth passes between generations. Money that is advised,
+         insured, valued and inherited does not evacuate the category in a bad year.</p>
+      <p class="say-p caveat">Deloitte is used here for collector wealth and confidence
+         <em>only</em>. It does not cover artist populations or stylistic trends, and this deck
+         does not ask it to.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">UHNWI wealth held in art and collectibles <span class="chart-unit">USD tn</span></p>
+      <svg viewBox="0 0 620 220" role="img" aria-label="Bar chart: ultra high net worth individuals held 2.56 trillion dollars in art and collectibles in 2024, projected to 3.47 trillion by 2030.">
+        <g class="grid"><line x1="110" y1="16" x2="110" y2="180"></line></g>
+        <g class="row">
+          <text class="cat" x="98" y="64">2024</text>
+          <rect class="bar bar--other" x="110" y="40" width="295.1" height="38" rx="4"></rect>
+          <text class="val" x="417" y="64">2.56</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="98" y="144">2030</text>
+          <rect class="bar bar--est" x="110" y="120" width="400" height="38" rx="4"></rect>
+          <text class="val" x="522" y="144">3.47</text>
+        </g>
+        <text class="note" x="110" y="196">Dashed bar is a projection, not an observation.</text>
+      </svg>
+      <figcaption>Also: ~121,000 UHNWIs in 2024, projected 163,725 by 2030. Source:
+        <b>Deloitte Private &amp; ArtTactic Art &amp; Finance Report 2025</b> (2025 edition — the
+        most recent; the report is published irregularly).</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: apoyo. SOLO confianza y riqueza del coleccionista (spec §7).
+     La edición 2025 verificada como la más reciente el 2026-08-07.</p>
+</section>
+
+<!-- ══ 9 — Prueba de apetito ══ -->
+<section class="slide" data-slide="9">
+  <header class="slide-head">
+    <p class="eyebrow">Demand already demonstrated</p>
+    <h2>Japanese painting already sits at the top of this market</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">In 2023 the best-selling contemporary artist at auction in the
+         world was <b>Yayoi Kusama</b>. The third was <b>Yoshitomo Nara</b>.</p>
+      <p class="say-p">The question &ldquo;will buyers pay serious money for a Japanese
+         painter?&rdquo; has an answer, and it is yes. Nara's <i>Knife Behind Back</i> made
+         HK$195.7m at Sotheby's Hong Kong in October 2019.</p>
+      <p class="say-p"><b>But look at where it clears:</b> 80% of Kusama's auction lots sold in
+         Hong Kong. The trade settles in Asia. The retrospectives that built the name ran through
+         Madrid, Paris and London in 2011&ndash;12. <em>That gap is this entire deck.</em></p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Top contemporary artists by auction turnover, 2023 <span class="chart-unit">USD m</span></p>
+      <svg viewBox="0 0 620 240" role="img" aria-label="Bar chart of 2023 auction turnover: Yayoi Kusama 80.9 million dollars, David Hockney 50.3 million, Yoshitomo Nara 36.0 million, Cecily Brown 31.7 million.">
+        <g class="grid"><line x1="130" y1="16" x2="130" y2="224"></line></g>
+        <g class="row">
+          <text class="cat" x="118" y="40">Yayoi Kusama</text>
+          <rect class="bar bar--jp" x="130" y="22" width="400" height="26" rx="4"></rect>
+          <text class="val" x="542" y="40">80.9</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="118" y="94">David Hockney</text>
+          <rect class="bar bar--other" x="130" y="76" width="248.7" height="26" rx="4"></rect>
+          <text class="val" x="391" y="94">50.3</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="118" y="148">Yoshitomo Nara</text>
+          <rect class="bar bar--jp" x="130" y="130" width="178" height="26" rx="4"></rect>
+          <text class="val" x="320" y="148">36.0</text>
+        </g>
+        <g class="row">
+          <text class="cat" x="118" y="202">Cecily Brown</text>
+          <rect class="bar bar--other" x="130" y="184" width="156.7" height="26" rx="4"></rect>
+          <text class="val" x="299" y="202">31.7</text>
+        </g>
+      </svg>
+      <p class="legend">
+        <span class="key key--jp">Japanese artist</span>
+        <span class="key key--other">Other</span>
+      </p>
+      <figcaption><b>Artist-level evidence, kept separate on purpose:</b> neither UBS nor Deloitte
+        segments by artist nationality, so no macro chart in this deck can speak to this.
+        Source: <b>Hiscox Artist Top 100 (HAT 100), April 2024 edition</b> — works made since 2000
+        sold at Christie's, Sotheby's and Phillips.</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: apetito demostrado. La regla dura del criterio 4 va escrita en el
+     pie del gráfico, visible en la sala y no sólo en el repo.</p>
+</section>
+
+<!-- ══ 10 — La brecha ══ -->
+<section class="slide" data-slide="10">
+  <header class="slide-head">
+    <p class="eyebrow">Where the opportunity lives</p>
+    <h2>The gap</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede lede--sm">There is a class of painter who is <em>established in Japan</em> and
+       <em>absent from Europe</em>. Not rejected by Europe. Absent from it.</p>
+    <div class="cols cols-3">
+      <div class="col">
+        <h3>What they already have</h3>
+        <p>A domestic market that clears. Decades of production behind them. Collectors who
+           know the name. And a dealer holding real depth of inventory — which is the part
+           that matters here.</p>
+      </div>
+      <div class="col">
+        <h3>What they do not have</h3>
+        <p>A European exhibition history. A bibliography in a European language. A curator in
+           Paris or Berlin who can say the name without looking it up.</p>
+      </div>
+      <div class="col col--accent">
+        <h3>What the absence costs</h3>
+        <p>An artist established at home and unknown abroad is priced by one market only.
+           That ceiling is not made of quality. It is made of absence — and absence is the
+           one constraint a dealer can actually remove.</p>
+      </div>
+    </div>
+    <p class="band">Honesty about this slide: we are naming the gap, not sizing it.
+       <b>No reliable count of working artists by nationality exists</b> — no registry keeps one.
+       Anything that claims to size this is a proxy (gallery rosters, fair and biennial
+       participation, cultural-employment statistics), and we would label it as such.</p>
+  </div>
+  <p class="slide-note">Función: la brecha. Descansa sobre el supuesto A1 (spec §5). La banda
+     inferior cumple spec §8.4: "número de artistas" no tiene fuente fiable.</p>
+</section>
+
+<!-- ══ 11 — La cadena de ROI ══ -->
+<section class="slide" data-slide="11">
+  <header class="slide-head">
+    <p class="eyebrow">The mechanism</p>
+    <h2>How a European show pays you back</h2>
+  </header>
+  <div class="slide-body">
+    <ol class="chain">
+      <li class="link">
+        <span class="link-n">1</span>
+        <h3>A European institutional or biennial exhibition</h3>
+      </li>
+      <li class="link">
+        <span class="link-n">2</span>
+        <h3>Critical coverage and permanent CV weight</h3>
+      </li>
+      <li class="link">
+        <span class="link-n">3</span>
+        <h3>A higher primary price, defensible to the next buyer</h3>
+      </li>
+      <li class="link">
+        <span class="link-n">4</span>
+        <h3>A deeper, more liquid secondary market</h3>
+      </li>
+      <li class="link link--payoff">
+        <span class="link-n">5</span>
+        <h3>A larger margin on the inventory you already hold in Tokyo</h3>
+      </li>
+    </ol>
+    <p class="pull">This is not only about selling new work in Europe.<br>
+       It is about revaluing the stock already sitting in your warehouse.</p>
+    <div class="cols cols-2 cols--tight">
+      <div class="col">
+        <p>A dealer accumulates inventory in <b>established</b> artists, not emerging ones.
+           So the opportunity here is not launching careers. It is re&#8209;validating, in Europe,
+           careers that were already made in Japan.</p>
+      </div>
+      <div class="col">
+        <p class="caveat">Link 1 to link 3 is the claim this room will test, and it should.
+           It is a <b>pattern, not a guarantee</b>. The next slide is where we put evidence
+           under it.</p>
+      </div>
+    </div>
+  </div>
+  <p class="slide-note">Función: mecanismo, no abstracción (criterio 3). El eslabón 5 usa
+     literalmente las palabras de la spec §4.</p>
+</section>
+
+<!-- ══ 12 — Comparables (portante) ══ -->
+<section class="slide" data-slide="12">
+  <header class="slide-head">
+    <p class="eyebrow">The evidence</p>
+    <h2>Three careers, before and after a European institution</h2>
+  </header>
+  <div class="slide-body">
+    <div class="cases">
+
+      <!-- Caso 1: japonés, medido, misma casa y misma divisa -->
+      <article class="case">
+        <h3>Tetsuya Ishida <span class="case-tag">painter, Japan</span></h3>
+        <ol class="tl">
+          <li class="tl-price"><b>HK$0.78m</b><span>Christie's Hong Kong, Nov 2006 — against a
+              HK$60&ndash;80k estimate</span></li>
+          <li class="tl-inst"><b>Venice Biennale</b><span>2015</span></li>
+          <li class="tl-inst"><b>Museo Reina Sofía, Madrid</b><span>solo retrospective,
+              Apr&ndash;Sep 2019</span></li>
+          <li class="tl-price"><b>HK$6.25m</b><span>Christie's Hong Kong, Dec 2021</span></li>
+          <li class="tl-price tl-price--record"><b>HK$10.01m</b><span>Bonhams Hong Kong,
+              3 Dec 2024 — artist record, US$1,286,510</span></li>
+        </ol>
+        <p class="case-note">Bonhams itself attributes the rise to the Venice and Reina Sofía
+          exhibitions. Same currency, same channel, institution first.</p>
+      </article>
+
+      <!-- Caso 2: vivo, consolidado, ruta británica -->
+      <article class="case">
+        <h3>Frank Bowling <span class="case-tag">painter, b. 1934, living</span></h3>
+        <ol class="tl">
+          <li class="tl-price"><b>under $300k</b><span>works offered at Art Basel, early 2019
+              — before the retrospective opened</span></li>
+          <li class="tl-inst"><b>Tate Britain</b><span>first major retrospective,
+              31 May&ndash;26 Aug 2019</span></li>
+          <li class="tl-price tl-price--record"><b>$930,540</b><span><i>Moby Dick</i>,
+              Sotheby's London, 2023 — artist record</span></li>
+        </ol>
+        <p class="case-note">Closest to what we are proposing: an established living painter,
+          re-read by one museum. Note the two figures are different channels — a primary asking
+          price and an auction result — so read the direction, not the multiple.</p>
+      </article>
+
+      <!-- Caso 3: apoyo, sin "antes" medido -->
+      <article class="case case--support">
+        <h3>Miriam Cahn <span class="case-tag">painter, b. 1949, living</span></h3>
+        <ol class="tl">
+          <li class="tl-inst"><b>documenta 14</b><span>Athens and Kassel, 2017</span></li>
+          <li class="tl-inst"><b>Four museums in one year</b><span>Kunstmuseum Bern, Kunsthaus
+              Bregenz, Reina Sofía, Haus der Kunst — 2019</span></li>
+          <li class="tl-inst"><b>Palais de Tokyo, Paris</b><span>2023</span></li>
+          <li class="tl-price tl-price--record"><b>$703,070</b><span><i>Das Genaue Hinschauen</i>,
+              Sotheby's London, 2023 — artist record</span></li>
+        </ol>
+        <p class="case-note"><b>Supporting case, not a measured one.</b> No documented pre-2017
+          price level was found, so this shows the institutional sequence only. We are not going
+          to invent the missing number.</p>
+      </article>
+
+    </div>
+    <p class="band band--gate"><b>What this is and is not.</b> Three cases are a pattern, not a
+       guarantee, and none of these painters is a Japanese artist working in Japan today except
+       Ishida, who died in 2005 — with a dead artist the supply is fixed, which flatters the
+       price move. We would rather you discount for that here than discover it later.</p>
+  </div>
+  <footer class="slide-foot"><span class="src">Sources: Bonhams press release, 3 Dec 2024 · Christie's Hong Kong sale results · Museo Reina Sofía · Tate Britain · Sotheby's London · documenta 14 · Palais de Tokyo. Auction figures are hammer plus premium as reported.</span></footer>
+  <p class="slide-note">Función: la única prueba causal del deck (spec §8.1). Los tres casos
+     tienen el momento institucional ANTES del movimiento de precio. La banda final concede los
+     límites por adelantado — sobrevender pierde la sala más rápido que quedarse corto.</p>
+</section>
+
+<!-- ══ 13 — Economía operativa ══ -->
+<section class="slide" data-slide="13">
+  <header class="slide-head">
+    <p class="eyebrow">The objection, answered first</p>
+    <h2>What it actually costs to move a painting into Europe</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede lede--sm">Nothing here will surprise anyone who has shipped a painting.
+       We are putting it up so that <em>nobody has to ask</em>.</p>
+    <table class="ledger">
+      <thead>
+        <tr><th>Line</th><th>What it is</th><th>The number that is public</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fair stand</td>
+          <td>Booth rental is quoted per fair and per size — get it in writing from the fair, not
+              from us. What the sector data does tell you: fairs now carry a third of the trade.</td>
+          <td>Fairs = <b>35%</b> of dealer sales, 2025<br><span class="sub">up from 31% in 2024</span></td>
+        </tr>
+        <tr>
+          <td>Freight</td>
+          <td>Crated, flat, air&#8209;freighted. No rigging, no install crew, no engineering.</td>
+          <td>Quote per crate<br><span class="sub">dealer operating costs rose <b>5%</b> in 2025</span></td>
+        </tr>
+        <tr>
+          <td>Import VAT</td>
+          <td>Both the EU and the UK apply <b>reduced</b> rates to imported art. This is a real,
+              checkable advantage — and it moved recently, so we date it.</td>
+          <td>France <b>5.5%</b> · UK <b>5%</b> · Italy <b>5%</b><br><span class="sub">Italy from June 2025</span></td>
+        </tr>
+        <tr>
+          <td>EU margin scheme</td>
+          <td>Since 1 Jan 2025, taking France's reduced import rate generally means you cannot
+              then use the margin scheme on the resale. Price the whole chain, not one line.</td>
+          <td>Changed <b>1 Jan 2025</b></td>
+        </tr>
+        <tr class="row--flag">
+          <td><i>Droit de suite</i></td>
+          <td>The artist's resale right. It exists across the EU and in the UK. <b>It does not
+              exist in Japan.</b> Living artists qualify, so it will apply to your painters.</td>
+          <td><b>4%</b> to &euro;50k, then 3% / 1% / 0.5% / 0.25%<br>
+              <span class="sub">capped at <b>&euro;12,500</b> per sale · Directive 2001/84/EC, retained by the UK</span></td>
+        </tr>
+        <tr>
+          <td>Consignment</td>
+          <td>European practice: split, duration, and who pays freight in each direction. Worth
+              agreeing in writing before the first crate leaves.</td>
+          <td>Negotiated</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="band"><b>Note what is not on this list:</b> a rigging crew, a structural engineer,
+       an installation team, a conservator on site. <b>Painting is the cheap logistics case.</b>
+       That is an argument for moving now, not later.</p>
+  </div>
+  <footer class="slide-foot"><span class="src">Sources: Art Basel &amp; UBS Global Art Market Report 2026 (2026 edition, data for 2025) · EU Directive 2001/84/EC and UK Artist's Resale Right · French, UK and Italian VAT rules as at August 2026</span></footer>
+  <p class="slide-note">Función: anticipa la objeción. Nombrar el <i>droit de suite</i> sin que lo
+     pregunten compra credibilidad (spec §6). No se inventa un coste de stand: se da el dato
+     público que sí existe y se dice que el resto se cotiza.</p>
+</section>
+
+<!-- ══ 14 — El yen ══ -->
+<section class="slide" data-slide="14">
+  <header class="slide-head">
+    <p class="eyebrow">Timing</p>
+    <h2>Why now: what the yen actually does</h2>
+  </header>
+  <div class="slide-body slide-body--split">
+    <div class="say">
+      <p class="lede lede--sm">The yen does not make Europe cheaper. It makes European proceeds
+         <em>bigger</em>.</p>
+      <p class="say-p">A $100,000 sale converted at 2020's rate was ¥10.7m. At today's rate it is
+         <b>¥15.8m</b> — <b>47% more yen</b> for the same dollar price. Your costs inflate by the
+         same 47%, but costs are one-off and bounded, and a higher price level applies to
+         <em>everything you own</em>.</p>
+      <p class="say-p caveat"><b>This argument is not load-bearing, and we will not pretend it
+         is.</b> Currency reverses. If the yen strengthens tomorrow, the institutional case, the
+         size of the market and the rise of Paris are exactly where they were — which is why they
+         came first and this comes fourth.</p>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Yen per US dollar <span class="chart-unit">higher = weaker yen</span></p>
+      <svg viewBox="0 0 620 262" role="img" aria-label="Line chart of yen per US dollar, annual averages 2015 to 2026: 121.0, 110.6, 111.8, 110.4, 109.0, 106.8, 113.6, 131.5, 149.1, 150.4, 157.3, and 157.6 year to date in 2026.">
+        <g class="grid">
+          <line x1="50" y1="212" x2="600" y2="212"></line>
+          <line x1="50" y1="147" x2="600" y2="147"></line>
+          <line x1="50" y1="83"  x2="600" y2="83"></line>
+        </g>
+        <g class="tick">
+          <text x="42" y="216">100</text>
+          <text x="42" y="151">120</text>
+          <text x="42" y="87">140</text>
+        </g>
+        <polyline class="line" points="50,144.3 100,177.8 150,174.0 200,178.5 250,183.0 300,190.1 350,168.1 400,110.4 450,53.6 500,49.4 550,27.2 600,26.2"></polyline>
+        <circle class="dot" cx="300" cy="190.1" r="5"></circle>
+        <circle class="dot dot--now" cx="600" cy="26.2" r="5"></circle>
+        <text class="pt" x="300" y="208" text-anchor="middle">106.8</text>
+        <text class="pt pt--now" x="590" y="44" text-anchor="end">157.6</text>
+        <g class="tick">
+          <text x="50"  y="234" text-anchor="middle">2015</text>
+          <text x="300" y="234" text-anchor="middle">2020</text>
+          <text x="600" y="234" text-anchor="middle">2026</text>
+        </g>
+      </svg>
+      <figcaption>Annual averages, rounded; 2026 is year-to-date. Spot rate <b>¥157.55 = $1 on
+        7 August 2026</b> — the conversion date used throughout this deck. Source:
+        <b>US Federal Reserve H.10 release</b>, series for Japan.</figcaption>
+    </figure>
+  </div>
+  <p class="slide-note">Función: urgencia. <b>Divergencia consciente respecto a la spec §3</b>,
+     que hablaba de "momento barato para entrar": un yen débil encarece los costes europeos en
+     yenes, no los abarata. El argumento correcto —y el que sobrevive a la aritmética de esta
+     sala— es el lado del ingreso. Registrado en docs/plan.md §5 ter.</p>
+</section>
+
+<!-- ══ 15 — La petición ══ -->
+<section class="slide" data-slide="15">
+  <header class="slide-head">
+    <p class="eyebrow">The ask</p>
+    <h2>A staged entry you can budget</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede lede--sm">Not a strategy. One cycle, two tracks, twenty&#8209;four months,
+       and a date on which you are allowed to stop.</p>
+    <div class="cols cols-2">
+      <div class="col col--card">
+        <h3><span class="track">Track A</span> One fair, as a test</h3>
+        <ul class="tick">
+          <li>One European fair. One booth. Three or four painters, no more.</li>
+          <li>Budget lines: stand (quoted by the fair) · freight · insurance · travel ·
+              import VAT at 5&ndash;5.5%.</li>
+          <li>Measured by: works placed · new collector names captured ·
+              press pickups · curator conversations opened.</li>
+        </ul>
+        <p class="col-foot">The fair pays part of its own bill and buys the relationships.</p>
+      </div>
+      <div class="col col--card">
+        <h3><span class="track">Track B</span> One institutional route, in parallel</h3>
+        <ul class="tick">
+          <li>A curator&#8209;led group show, a Kunstverein, or a museum conversation begun and kept warm.</li>
+          <li>Budget lines: time · shipping · a proper catalogue. <b>No sales expectation.</b></li>
+          <li>Measured by: one confirmed institutional showing scheduled within twenty&#8209;four months.</li>
+        </ul>
+        <p class="col-foot">This track is the one that actually produces the revaluation.</p>
+      </div>
+    </div>
+    <p class="band band--gate"><b>The gate, agreed now rather than later:</b> if Track A recovers
+       <b>60%</b> of its cost <em>and</em> Track B has one date confirmed, you fund a second
+       cycle. If neither, you stop — and the loss is a number you knew before you started.
+       Doing only Track A is a sales trip. Doing only Track B is philanthropy.</p>
+  </div>
+  <p class="slide-note">Función: decisión presupuestable, no apelación cultural (criterio 7).
+     El 60% es una propuesta de política, no un dato — se negocia en la sala.</p>
+</section>
+
+<!-- ══ 16 — Opcionalidad ══ -->
+<section class="slide" data-slide="16">
+  <header class="slide-head">
+    <p class="eyebrow">Optionality — after the ask, on purpose</p>
+    <h2>Spain is a door to Latin America</h2>
+  </header>
+  <div class="slide-body">
+    <p class="lede lede--sm">This is <em>not</em> part of the decision on the previous slide.
+       It is worth knowing that it exists.</p>
+    <div class="cols cols-3 cols--tight">
+      <div class="col">
+        <h3>ARCOmadrid looks west</h3>
+        <p>Madrid's fair has a structural Latin American orientation that no other European
+           fair has: the galleries, the curators and the invited guests come from both sides
+           of the Atlantic.</p>
+      </div>
+      <div class="col">
+        <h3>One language, many markets</h3>
+        <p>Spanish carries a collector base across Mexico, Colombia, Argentina and Chile.
+           A press notice written in Madrid is legible in all of them without translation.</p>
+      </div>
+      <div class="col col--accent">
+        <h3>Low marginal cost</h3>
+        <p>If a European cycle is already running, adding Madrid is one more stop on a route
+           you are already paying for — not a second geography to open from zero.</p>
+      </div>
+    </div>
+    <p class="band">Spain grew 6% in 2025. And note which museum keeps appearing in the evidence
+       on slide 12: the <b>Reina Sofía</b>, in Madrid, twice. Say yes to Europe first —
+       this one keeps.</p>
+  </div>
+  <footer class="slide-foot"><span class="src">Source: Art Basel &amp; UBS Global Art Market Report 2026 (2026 edition, data for 2025)</span></footer>
+  <p class="slide-note">Función: opcionalidad post-cierre. Deliberadamente DESPUÉS de la 15
+     (spec §6). El guiño al Reina Sofía cierra el círculo con la 12 sin pedir nada nuevo.</p>
+</section>
+
+</div><!-- /stage -->
+
+<!-- Barra de navegación; se oculta al imprimir -->
+<nav class="hud" id="hud">
+  <button class="hud-btn" id="prev" aria-label="Previous slide">&#8592;</button>
+  <span class="hud-count"><b id="cur">1</b><span class="sep">/</span><span id="total">16</span></span>
+  <button class="hud-btn" id="next" aria-label="Next slide">&#8594;</button>
+  <button class="hud-btn hud-btn--wide" id="notes" aria-label="Toggle build notes">notes</button>
+</nav>
+<div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+
+<script src="deck.js"></script>
+</body>
+</html>

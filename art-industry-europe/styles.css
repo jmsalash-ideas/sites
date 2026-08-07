@@ -1,0 +1,613 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Deck "Where a Reputation Is Made" — hoja de estilo única.
+   Sin framework, sin build, sin dependencias de red (plan §1).
+
+   Escalado: la .stage es un contenedor de tamaño consultable y TODO se
+   dimensiona en cqw (1cqw = 1% del ancho del escenario). Así el deck se
+   lee igual proyectado en una sala que impreso a PDF.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Paleta de superficie: fondo tinta profunda, texto cálido. */
+  --ink:        #0d1117;
+  --ink-2:      #151c26;
+  --paper:      #f2ede4;
+  --paper-dim:  #a9a396;
+  --rule:       #2b3543;
+
+  /* Acentos de composición (no de datos). */
+  --accent:     #c9a227;  /* oro apagado — Europa, lo institucional */
+  --warn:       #ff9d2e;  /* ámbar — SOLO marcadores [VERIFY] */
+  --alert:      #d9603b;  /* terracota — el declive, dicho sin miedo */
+
+  /* ── Paleta de DATOS ──────────────────────────────────────────────────
+     Tomada tal cual de los tramos oscuros ya validados de la guía de
+     visualización, en su orden fijo: slot 1 azul, slot 2 naranja. Los dos
+     primeros slots pasan todas las puertas (CVD y visión normal) sobre
+     superficie oscura, y aquí nunca hay más de dos series en un gráfico.
+     La superficie real del deck (#0d1117) es más oscura que la de
+     referencia, así que el contraste sólo puede ser mejor.               */
+  --viz-1:      #3987e5;  /* slot 1 — resto del mundo / serie única */
+  --viz-2:      #d95926;  /* slot 2 — Europa / año actual / artista japonés */
+  --viz-prev:   #6c6f75;  /* estado anterior, recesivo: no es una serie */
+  --viz-ink:    #f2ede4;
+  --viz-muted:  #9aa3ae;
+  --viz-grid:   #222b36;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: #05070a;
+  color: var(--paper);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  overflow: hidden;
+}
+
+/* ── Escenario 16:9, centrado y del mayor tamaño que quepa ────────────── */
+.stage {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(100vw, 177.7778vh);
+  height: min(56.25vw, 100vh);
+  container-type: size;
+  container-name: stage;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+/* ── Diapositiva ──────────────────────────────────────────────────────── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 5cqw 6cqw 3.6cqw;
+  background:
+    radial-gradient(120% 90% at 100% 0%, var(--ink-2) 0%, var(--ink) 55%);
+}
+.slide.is-active { display: flex; }
+
+.slide::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0.35cqw;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--viz-1) 60%, transparent 100%);
+  opacity: .8;
+}
+
+.slide-head { margin-bottom: 2.2cqw; }
+
+.eyebrow {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.25cqw;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1cqw;
+}
+
+h1 {
+  font-size: 7.4cqw;
+  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 4cqw;
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  max-width: 26em;
+}
+
+/* Columna flexible: es lo que hace que `margin-top: auto` empuje .pull y .band
+   al pie de la diapositiva. Las diapositivas de dato la sobrescriben con grid. */
+.slide-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.9cqw;
+  line-height: 1.5;
+}
+
+.slide-foot {
+  margin-top: 1.2cqw;
+  padding-top: .9cqw;
+  border-top: 1px solid var(--rule);
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.02cqw;
+  color: var(--paper-dim);
+  letter-spacing: .02em;
+}
+.src { display: block; }
+
+/* ── Portada ──────────────────────────────────────────────────────────── */
+.slide--cover { justify-content: center; padding: 6cqw 8cqw; }
+.slide--cover .eyebrow { margin-bottom: 1.8cqw; }
+.cover-rule { width: 12cqw; height: 0.28cqw; background: var(--accent); margin-bottom: 3cqw; }
+.deck-sub {
+  margin-top: 2.2cqw;
+  font-size: 2.3cqw;
+  line-height: 1.35;
+  color: var(--paper-dim);
+  max-width: 30em;
+}
+.cover-meta { margin-top: 4cqw; display: flex; gap: 1.2cqw; flex-wrap: wrap; }
+
+.badge {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.05cqw;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 0.7cqw 1.2cqw;
+  border: 1px solid currentColor;
+  border-radius: 10cqw;
+  color: var(--paper-dim);
+}
+.badge--draft { color: var(--paper-dim); }
+.badge--verify { color: var(--warn); }
+.badge--verify b { font-size: 1.3cqw; }
+
+/* ── El marcador [VERIFY] (plan §2). En cero, no debe aparecer ninguno. ── */
+.verify {
+  color: var(--warn);
+  background: rgba(255, 157, 46, .12);
+  border-bottom: 0.15cqw solid var(--warn);
+  padding: 0 .35em;
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: .88em;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+/* ── Notas de construcción: sólo para Jose, nunca en la sala ni en PDF ── */
+.slide-note {
+  position: absolute;
+  left: 6cqw; right: 6cqw; bottom: 1cqw;
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.02cqw;
+  line-height: 1.4;
+  color: #6f7d8f;
+  border-left: 0.2cqw solid var(--rule);
+  padding-left: 0.9cqw;
+  display: none;
+}
+body.notes-on .slide-note { display: block; }
+.slide-note code { font-family: ui-monospace, Menlo, monospace; color: var(--warn); }
+.slide-note b { color: #93a3b5; }
+
+/* ── Componentes de prosa ─────────────────────────────────────────────── */
+.lede {
+  font-size: 3cqw;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  max-width: 34em;
+  margin-bottom: 2.4cqw;
+}
+.lede--sm { font-size: 2.2cqw; max-width: 42em; margin-bottom: 1.8cqw; }
+.lede em, .pull em, .col em, .say-p em { font-style: italic; color: var(--accent); }
+.lede b { color: var(--paper); }
+
+.cols { display: grid; gap: 2.2cqw; align-items: start; }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols--tight { gap: 1.5cqw 2cqw; }
+
+.col h3 {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.5cqw;
+  font-weight: 600;
+  letter-spacing: .02em;
+  margin-bottom: .8cqw;
+  padding-bottom: .55cqw;
+  border-bottom: 1px solid var(--rule);
+}
+.col p { font-size: 1.55cqw; line-height: 1.48; color: #ddd7cb; }
+.col p + p { margin-top: .7cqw; }
+.col b { color: var(--paper); }
+
+.col-items {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.25cqw !important;
+  color: var(--accent) !important;
+  letter-spacing: .01em;
+  line-height: 1.35 !important;
+}
+.col-foot { font-style: italic; color: var(--paper-dim) !important; margin-top: 1cqw !important; }
+.caveat { color: var(--paper-dim) !important; }
+.caveat b { color: var(--paper); }
+
+.col--accent h3 { color: var(--accent); border-bottom-color: var(--accent); }
+.col--card {
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--rule);
+  border-radius: .7cqw;
+  padding: 1.8cqw;
+}
+.col--card h3 { border-bottom-color: var(--accent); }
+
+.track {
+  display: inline-block;
+  font-size: .8em;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: .7em;
+}
+
+ul.tick { list-style: none; margin-top: .4cqw; }
+ul.tick li {
+  position: relative;
+  padding-left: 1.5cqw;
+  font-size: 1.5cqw;
+  line-height: 1.45;
+  color: #ddd7cb;
+  margin-top: .9cqw;
+}
+ul.tick li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .62em;
+  width: .55cqw; height: .55cqw;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+ul.tick b { color: var(--paper); }
+
+.pull {
+  margin-top: auto;
+  padding-top: 1.8cqw;
+  font-size: 2.4cqw;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  border-top: 1px solid var(--rule);
+}
+
+.band {
+  margin-top: auto;
+  padding: 1.1cqw 1.4cqw;
+  background: rgba(255,255,255,.04);
+  border-left: .3cqw solid var(--accent);
+  font-size: 1.45cqw;
+  line-height: 1.45;
+  color: #ddd7cb;
+}
+.band b { color: var(--paper); }
+.band--gate { border-left-color: var(--alert); }
+
+/* ── Diapositivas de dato: argumento a la izquierda, gráfico a la derecha ── */
+.slide-body--split {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 3cqw;
+  align-items: start;
+}
+.say .lede { margin-bottom: 1.5cqw; }
+.say-p {
+  font-size: 1.55cqw;
+  line-height: 1.5;
+  color: #ddd7cb;
+  margin-top: 1cqw;
+  max-width: 34em;
+}
+.say-p b { color: var(--paper); }
+.say-p.alert { border-left: .25cqw solid var(--alert); padding-left: 1.1cqw; }
+.say-p.caveat { color: var(--paper-dim); }
+
+/* ── Gráficos ─────────────────────────────────────────────────────────────
+   SVG a mano, no librería: cada gráfico lleva fuente y año de edición al
+   pie (criterio 6) y son pocos y muy deliberados (plan §1).
+   Sin capa de hover a propósito: esto se proyecta, nadie pasa el ratón.
+   La compensación es que TODA marca lleva su valor rotulado al lado.      */
+.chart { display: block; }
+
+.chart-title {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.2cqw;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--paper);
+  margin-bottom: .9cqw;
+}
+.chart-unit {
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: .82em;
+  color: var(--viz-muted);
+  margin-left: .6em;
+}
+
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart svg text {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  fill: var(--viz-ink);
+}
+
+/* Rejilla y ejes, recesivos */
+.chart .grid line { stroke: var(--viz-grid); stroke-width: 1; }
+.chart .tick text { font-size: 13px; fill: var(--viz-muted); }
+.chart .colhead { font-size: 12px; fill: var(--viz-muted); letter-spacing: .1em; text-transform: uppercase; }
+
+/* Marcas: finas, extremos redondeados de 4px anclados a la línea base.
+   `.row` es sólo un agrupador semántico dentro del SVG; no lleva estilo. */
+.bar--other { fill: var(--viz-1); }
+.bar--eu, .bar--jp, .bar--now { fill: var(--viz-2); }
+.bar--prev { fill: var(--viz-prev); }
+.bar--est  { fill: none; stroke: var(--viz-1); stroke-width: 2; stroke-dasharray: 7 5; }
+
+.chart .cat { font-size: 16px; fill: var(--viz-ink); text-anchor: end; }
+.chart .val { font-size: 18px; font-weight: 600; fill: var(--viz-ink); text-anchor: start;
+              font-variant-numeric: tabular-nums; }
+.chart .val--sm { font-size: 15px; font-weight: 400; fill: var(--viz-muted); }
+.chart .delta { font-size: 17px; font-weight: 600; fill: var(--viz-muted); }
+.chart .delta--up { fill: var(--viz-2); }
+.chart .note { font-size: 12px; fill: var(--viz-muted); }
+
+/* Líneas: 2px, marcadores de 10px de diámetro */
+.chart .line {
+  fill: none;
+  stroke: var(--viz-1);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart .dot { fill: var(--viz-1); stroke: var(--ink); stroke-width: 2; }
+.chart .dot--now { fill: var(--viz-2); }
+.chart .pt { font-size: 15px; font-weight: 600; fill: var(--viz-ink); font-variant-numeric: tabular-nums; }
+.chart .pt--now { fill: var(--viz-2); }
+.chart .ref { stroke: var(--viz-muted); stroke-width: 1; stroke-dasharray: 5 5; }
+.chart .ref-lab { font-size: 12px; fill: var(--viz-muted); letter-spacing: .08em; text-transform: uppercase; }
+
+/* Leyenda: presente siempre que haya dos categorías, además del rótulo directo */
+.legend {
+  display: flex;
+  gap: 1.4cqw;
+  margin-top: .8cqw;
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.05cqw;
+  color: var(--paper-dim);
+}
+.key { display: inline-flex; align-items: center; }
+.key::before {
+  content: "";
+  width: .8cqw; height: .8cqw;
+  border-radius: .2cqw;
+  margin-right: .5cqw;
+}
+.key--eu::before, .key--jp::before, .key--now::before { background: var(--viz-2); }
+.key--other::before { background: var(--viz-1); }
+.key--prev::before  { background: var(--viz-prev); }
+
+.chart figcaption {
+  margin-top: 1cqw;
+  padding-top: .8cqw;
+  border-top: 1px solid var(--rule);
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.02cqw;
+  line-height: 1.4;
+  color: var(--paper-dim);
+}
+.chart figcaption b { color: #ccc6ba; }
+
+/* ── Comparables (diapositiva 12) ─────────────────────────────────────── */
+.cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8cqw; }
+.case {
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--rule);
+  border-radius: .7cqw;
+  padding: 1.4cqw 1.5cqw;
+}
+.case--support { border-style: dashed; background: none; }
+.case h3 {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.55cqw;
+  font-weight: 600;
+  padding-bottom: .6cqw;
+  margin-bottom: .9cqw;
+  border-bottom: 1px solid var(--accent);
+}
+.case-tag {
+  display: block;
+  font-size: .66em;
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  margin-top: .25cqw;
+}
+
+/* La línea de tiempo: el momento institucional y el precio, en orden.
+   El orden vertical ES el argumento — institución antes que precio. */
+.tl { list-style: none; }
+.tl li {
+  position: relative;
+  padding-left: 1.6cqw;
+  padding-bottom: .8cqw;
+  font-size: 1.3cqw;
+  line-height: 1.3;
+}
+.tl li::before {
+  content: "";
+  position: absolute;
+  left: .18cqw; top: .5cqw;
+  width: .6cqw; height: .6cqw;
+  border-radius: 50%;
+}
+/* La línea vertical que une los hitos */
+.tl li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: .46cqw; top: 1.1cqw; bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+.tl-inst::before  { background: var(--viz-2); }
+.tl-price::before { background: var(--viz-prev); }
+.tl-price--record::before { background: var(--accent); }
+.tl li b { display: block; color: var(--paper); font-size: 1.05em; }
+.tl-inst b { color: var(--viz-2); }
+.tl-price--record b { color: var(--accent); }
+.tl li span { display: block; color: var(--paper-dim); font-size: .88em; margin-top: .15cqw; }
+
+.case-note {
+  margin-top: .7cqw;
+  padding-top: .7cqw;
+  border-top: 1px solid var(--rule);
+  font-size: 1.15cqw;
+  line-height: 1.38;
+  color: var(--paper-dim);
+}
+.case-note b { color: var(--paper); }
+
+/* ── Tabla de costes (diapositiva 13) ─────────────────────────────────── */
+.ledger { width: 100%; border-collapse: collapse; font-size: 1.35cqw; }
+.ledger th {
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1cqw;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: left;
+  padding-bottom: .6cqw;
+  border-bottom: 1px solid var(--accent);
+}
+.ledger td {
+  padding: .7cqw 1.2cqw .7cqw 0;
+  border-bottom: 1px solid var(--rule);
+  color: #ddd7cb;
+  line-height: 1.35;
+  vertical-align: top;
+}
+.ledger td:first-child { color: var(--paper); white-space: nowrap; padding-right: 2cqw; }
+.ledger td:last-child  { text-align: right; padding-right: 0; white-space: nowrap; }
+.ledger th:last-child  { text-align: right; }
+.ledger b { color: var(--paper); }
+.ledger .sub { font-size: .85em; color: var(--paper-dim); }
+/* La fila del droit de suite se marca: es la que compra credibilidad. */
+.row--flag td { background: rgba(217,96,59,.09); }
+.row--flag td:first-child { color: var(--alert); }
+
+/* ── La cadena de ROI (diapositiva 11) ────────────────────────────────── */
+.chain {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.1cqw;
+  margin-bottom: .5cqw;
+}
+.link {
+  position: relative;
+  padding: 1.4cqw 1.2cqw;
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--rule);
+  border-radius: .6cqw;
+  min-height: 11cqw;
+}
+.link + .link::before {
+  content: "";
+  position: absolute;
+  left: -1.35cqw; top: 50%;
+  width: 1.1cqw; height: 1px;
+  background: var(--rule);
+}
+.link + .link::after {
+  content: "";
+  position: absolute;
+  left: -0.55cqw; top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: .5cqw; height: .5cqw;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+.link-n {
+  display: block;
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-size: 1.1cqw;
+  letter-spacing: .2em;
+  color: var(--accent);
+  margin-bottom: .8cqw;
+}
+.link h3 {
+  font-size: 1.6cqw; font-weight: 400; line-height: 1.28;
+  border: 0; padding: 0; margin: 0; font-family: inherit; letter-spacing: 0;
+}
+.link--payoff { background: rgba(201,162,39,.13); border-color: var(--accent); }
+.link--payoff h3 { color: var(--accent); }
+
+/* ── HUD de navegación ────────────────────────────────────────────────── */
+.hud {
+  position: fixed;
+  right: 1.4vw; bottom: 1.4vw;
+  display: flex; align-items: center; gap: .5vw;
+  font-family: "Helvetica Neue", Inter, system-ui, sans-serif;
+  opacity: .28;
+  transition: opacity .25s;
+  z-index: 10;
+}
+.hud:hover { opacity: 1; }
+.hud-btn {
+  background: rgba(255,255,255,.06);
+  color: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: .4vw;
+  font: inherit;
+  font-size: 1.1vw;
+  padding: .35vw .75vw;
+  cursor: pointer;
+}
+.hud-btn:hover { background: rgba(255,255,255,.14); }
+.hud-btn--wide { font-size: .85vw; letter-spacing: .12em; text-transform: uppercase; }
+.hud-count { font-size: 1.1vw; color: var(--paper-dim); padding: 0 .4vw; }
+.hud-count b { color: var(--paper); }
+.hud-count .sep { opacity: .4; margin: 0 .2vw; }
+
+.progress {
+  position: fixed;
+  left: 0; bottom: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,.06);
+  z-index: 10;
+}
+.progress-bar { height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+
+/* ═══ Impresión → PDF fiel, una diapositiva por página (plan §1) ═══════ */
+@page { size: 1600px 900px; margin: 0; }
+
+@media print {
+  html, body { height: auto; overflow: visible; background: #fff; }
+
+  .stage {
+    position: static;
+    transform: none;
+    width: 1600px;
+    height: auto;
+    container-type: inline-size;  /* ancho fijo 1600px ⇒ 1cqw = 16px, escala idéntica */
+  }
+
+  .slide {
+    position: relative;
+    inset: auto;
+    display: flex !important;
+    width: 1600px;
+    height: 900px;
+    break-after: page;
+    page-break-after: always;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+
+  .hud, .progress, .slide-note { display: none !important; }
+
+  /* Si quedara algún marcador pendiente, también se imprime: un PDF no miente. */
+  .verify { color: #b45f06; background: #fff3e0; }
+}
