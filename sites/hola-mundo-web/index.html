@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hola Mundo</title>
+<style>
+  /* Registradas para que el gradiente pueda interpolar sin JS.
+     Si el navegador no soporta @property, los valores de .body de abajo
+     siguen siendo válidos: se pierde la suavidad, no la página. */
+  @property --grad-c {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #FFB870;
+  }
+  @property --grad-x {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+  }
+  @property --grad-y {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+  }
+
+  html {
+    background: #FFB870;
+  }
+
+  body {
+    /* Radio de la órbita interior. Tiene que ser mayor que la media anchura
+       del h1 más el radio de la forma, en CUALQUIER viewport. El texto crece
+       con vw y las órbitas con vmin, así que un radio en vmin puro cruza las
+       letras en apaisado (844x390: media anchura 280px, 40vmin = 156px).
+         - 40vmin        -> caso normal, escala con la pantalla
+         - min(38vw,340) -> cubre apaisado; se corta en 340px porque a partir
+                            de vw=933 el texto ya está topado en 7rem
+         - 130px         -> suelo para pantallas muy estrechas, donde el texto
+                            está topado por abajo en 2.5rem */
+    --r1: max(40vmin, min(38vw, 340px), 130px);
+    --r2: calc(var(--r1) * 1.15);
+    --r3: calc(var(--r1) * 1.45);
+
+    --grad-c: #FFB870;
+    --grad-x: 50%;
+    --grad-y: 50%;
+
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at var(--grad-x) var(--grad-y),
+                                var(--grad-c) 0%, #FF8A2B 55%, #E85D04 100%);
+    animation: fondo 75s ease-in-out infinite alternate;
+  }
+
+  @keyframes fondo {
+    to {
+      --grad-c: #FF8A2B;
+      --grad-x: 56%;
+      --grad-y: 45%;
+    }
+  }
+
+  h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0 4vmin;
+    color: #1A0A00;
+    font: 800 clamp(2.5rem, 12vw, 7rem)/1.1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .orbitas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .orbita {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    /* Ángulo de reposo: 'transform' es independiente de la propiedad 'rotate',
+       que es la que anima. Compuestas, dan giro continuo desde un ángulo
+       distinto por órbita — que es lo que se ve con movimiento reducido. */
+    transform: rotate(var(--a));
+    animation: girar var(--t) linear infinite;
+    will-change: transform, rotate;
+  }
+
+  .orbita--1 { --a:  0deg; --t: 18s; }
+  .orbita--2 { --a: 40deg; --t: 28s; animation-direction: reverse; }
+  .orbita--3 { --a: 70deg; --t: 40s; }
+
+  @keyframes girar {
+    to { rotate: 360deg; }
+  }
+
+  .forma {
+    position: absolute;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: #FFFFFF;
+    /* Cuelga del borde superior de su órbita: centro a -r del centro. */
+    left: calc(var(--s) / -2);
+    top: calc(-1 * (var(--r) + var(--s) / 2));
+  }
+
+  /* La pareja, en el extremo opuesto. */
+  .forma--op {
+    top: auto;
+    bottom: calc(-1 * (var(--r) + var(--s) / 2));
+  }
+
+  /* Tamaño y opacidad, una por forma. Las grandes van más transparentes y
+     desenfocadas, para que el conjunto se lea como fondo. */
+  .orbita--1 .forma     { --r: var(--r1); --s:  4vmin; opacity: .28 }
+  .orbita--1 .forma--op { --r: var(--r1); --s:  6vmin; opacity: .24 }
+  .orbita--2 .forma     { --r: var(--r2); --s:  8vmin; opacity: .18; filter: blur(2px) }
+  .orbita--2 .forma--op { --r: var(--r2); --s:  5vmin; opacity: .26; filter: none }
+  .orbita--3 .forma     { --r: var(--r3); --s: 11vmin; opacity: .14; filter: blur(3px) }
+  .orbita--3 .forma--op { --r: var(--r3); --s:  7vmin; opacity: .22; filter: none }
+
+  @media (prefers-reduced-motion: reduce) {
+    body,
+    .orbita {
+      animation: none;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="orbitas" aria-hidden="true">
+    <div class="orbita orbita--1">
+      <div class="forma"></div>
+      <div class="forma forma--op"></div>
+    </div>
+    <div class="orbita orbita--2">
+      <div class="forma"></div>
+      <div class="forma forma--op"></div>
+    </div>
+    <div class="orbita orbita--3">
+      <div class="forma"></div>
+      <div class="forma forma--op"></div>
+    </div>
+  </div>
+  <h1>Hola Mundo</h1>
+</body>
+</html>
