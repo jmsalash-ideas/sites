@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Motion engine bench</title>
+    <link rel="stylesheet" href="./bench.css" />
+  </head>
+  <body>
+    <!--
+      A static stand-in for a product page. Not versaroom, and deliberately not
+      a copy of it: phase 1 tunes the motion, and motion does not care what the
+      page says. It only needs headings to point at, cards to highlight, and
+      enough height to scroll through.
+    -->
+    <header class="hero">
+      <nav class="nav">
+        <span class="brand">Bench</span>
+        <a href="#features">Features</a>
+        <a href="#practice">Practice</a>
+        <a href="#pricing">Pricing</a>
+        <button class="ghost" data-target="sign-in">Sign in</button>
+      </nav>
+      <h1>Speak a language the way you learned your first one.</h1>
+      <p class="lede">
+        Short conversations, every day, with a partner who never gets tired of you getting it
+        wrong.
+      </p>
+      <button class="cta" data-target="start">Start practice</button>
+    </header>
+
+    <section id="features">
+      <h2>Three things it does</h2>
+      <div class="cards">
+        <article class="card" data-target="card-listen">
+          <h3>Listens</h3>
+          <p>
+            Hold the button, say the sentence, let go. It hears the whole thing before it says
+            anything back.
+          </p>
+        </article>
+        <article class="card" data-target="card-corrects">
+          <h3>Corrects</h3>
+          <p>
+            One correction at a time, the one that matters most, in a sentence you can actually
+            repeat.
+          </p>
+        </article>
+        <article class="card" data-target="card-remembers">
+          <h3>Remembers</h3>
+          <p>
+            What you got wrong on Tuesday comes back on Friday, in a different sentence, on
+            purpose.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="practice" class="practice">
+      <h2>A session looks like this</h2>
+      <div class="transcript">
+        <p class="them" data-target="line-1">¿Qué hiciste el fin de semana?</p>
+        <p class="you" data-target="line-2">Fui a la playa con mis amigos.</p>
+        <p class="them" data-target="line-3">¿Y qué tal estuvo el agua?</p>
+        <p class="you" data-target="line-4">Estaba muy fría, pero nadamos igual.</p>
+        <p class="note" data-target="line-note">
+          "nadamos igual" — good. A native speaker would more likely say "nos metimos igual".
+        </p>
+      </div>
+      <button class="cta" data-target="try">Try a session</button>
+    </section>
+
+    <section id="pricing">
+      <h2>Pricing</h2>
+      <div class="cards">
+        <article class="card" data-target="plan-free">
+          <h3>Free</h3>
+          <p class="price">€0</p>
+          <p>One session a day. No card.</p>
+        </article>
+        <article class="card featured" data-target="plan-daily">
+          <h3>Daily</h3>
+          <p class="price">€9</p>
+          <p>Unlimited sessions, all languages, review queue.</p>
+        </article>
+        <article class="card" data-target="plan-team">
+          <h3>Team</h3>
+          <p class="price">€29</p>
+          <p>Five seats, shared vocabulary, one invoice.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <h2 data-target="footer-heading">Ten minutes a day is the whole method.</h2>
+      <button class="cta" data-target="footer-cta">Start practice</button>
+      <p class="fine">A bench page. Nothing here is real.</p>
+    </footer>
+
+    <!--
+      The control panel is bench-only scaffolding. Spec §6 forbids any extension
+      control from rendering inside the captured tab — in the real thing all of
+      this lives in the side panel, which tab capture cannot see. Hide it with H
+      to see the page as the camera would.
+    -->
+    <aside id="panel" class="panel">
+      <div class="panel-head">
+        <strong>Motion bench</strong>
+        <button id="hide-panel" title="Hide (H)">×</button>
+      </div>
+
+      <div class="row">
+        <button id="run" class="primary">Run the walk</button>
+        <button id="stop">Stop</button>
+      </div>
+      <div class="row">
+        <button id="prove">Prove the speed is constant</button>
+      </div>
+
+      <div class="knobs">
+        <label>
+          Cursor <output id="out-cursor"></output> px/s
+          <input id="k-cursor" type="range" min="200" max="2400" step="20" />
+        </label>
+        <label>
+          Scroll <output id="out-scroll"></output> px/s
+          <input id="k-scroll" type="range" min="150" max="2000" step="20" />
+        </label>
+        <label>
+          Ramp <output id="out-ramp"></output> ms
+          <input id="k-ramp" type="range" min="0" max="600" step="10" />
+        </label>
+        <label>
+          Dwell <output id="out-dwell"></output> ms
+          <input id="k-dwell" type="range" min="0" max="1500" step="25" />
+        </label>
+        <label>
+          Fade <output id="out-fade"></output> ms
+          <input id="k-fade" type="range" min="0" max="1200" step="20" />
+        </label>
+        <label>
+          Arc <output id="out-arc"></output>
+          <input id="k-arc" type="range" min="0" max="0.2" step="0.005" />
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="reset-pace">Reset profile</button>
+      </div>
+
+      <div class="meter">
+        <div class="meter-head">Measured</div>
+        <pre id="readout">Run the walk and this fills in.</pre>
+      </div>
+    </aside>
+    <button id="show-panel" class="show-panel" hidden>bench</button>
+
+    <script type="module" src="./bench.js"></script>
+  </body>
+</html>
